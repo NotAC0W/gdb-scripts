@@ -18,14 +18,23 @@ class WAsm(gdb.Command):
         super(WAsm, self).__init__ ("wasm", gdb.COMMAND_USER)
 
     def invoke(self, arg, from_tty):
-        cmd = ['pwn', 'asm', '-f','raw', '-c','amd64', arg]
-        result = subprocess.check_output(cmd)
-        opcodes = bytearray(result)
+        inf = gdb.selected_inferior()
+
+        if inf.pid == 0:
+            print("Target is not running")
+            return
+
+        if arg == "":
+            print("No arguments")
+            return
 
         ip = get_reg("pc")
-        for i in range(0, len(opcodes)):
-            cmd = "set *((char *)0x{:x}) = 0x{:x}".format(ip+i, opcodes[i])
-            #print(cmd)
-            gdb.execute(cmd)
+        #arch = gdb.newest_frame().architecture().name().split(":")[0]
+        arch = "amd64"
+
+        cmd = ['pwn', 'asm', '-f','raw', '-c', arch, arg]
+        opcodes = subprocess.check_output(cmd)
+
+        inf.write_memory(ip, opcodes)
 
 WAsm()
