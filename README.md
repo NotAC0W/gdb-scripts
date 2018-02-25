@@ -6,11 +6,12 @@
 
 ### wasm.py
 Write assembler on the fly into memory
+```
 wasm                              - Shows context used
 wasm <assembler code ... >        - Write at current $pc
 wasm <addr> <assembler code ... > - Write at address <addr>
 wasm context <context>            - Set context for pwntools asm to <context>. no argument unsets context
-
+```
 Requires pwnlib / pwntools to be installed
 
 
