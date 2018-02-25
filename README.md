@@ -6,8 +6,7 @@
 
 ### wasm.py
 
-Adds the command "wasm" to gdb that replaces the code from the current programm counter onwards with the assembler passed.
-Requires pwnlib / pwntools to be installed
+Adds the command "wasm" to gdb that replaces the code from the current programm counter onwards with the assembler code passed. Requires pwnlib / pwntools to be installed
 
 
 ```GDB
