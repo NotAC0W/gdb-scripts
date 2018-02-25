@@ -5,8 +5,13 @@
 
 
 ### wasm.py
+Write assembler on the fly into memory
+wasm                              - Shows context used
+wasm <assembler code ... >        - Write at current $pc
+wasm <addr> <assembler code ... > - Write at address <addr>
+wasm context <context>            - Set context for pwntools asm to <context>. no argument unsets context
 
-Adds the command "wasm" to gdb that replaces the code from the current programm counter onwards with the assembler code passed. Requires pwnlib / pwntools to be installed
+Requires pwnlib / pwntools to be installed
 
 
 ```GDB
